@@ -1,0 +1,24 @@
+<view>
+  <div class="panel">
+    <h2> Subscribe </h2>
+    <form action="subscribe">
+      <label> Which List
+        <select name="list">
+          <option>Pick one</option>
+          <?php echo $this->listsAvailable ?>
+        </select>
+      </label>
+      <!-- <label> Your Name
+        <input type="text" name="name" />
+      </label> -->
+      <label> Zip Code
+        <input type="text" name="zip" />
+      </label>
+      <label> Email Address
+        <input type="text" name="email" />
+      </label>
+      <input type="submit" />
+    </form>
+          <?php echo $this->inLists ?>
+  </div>
+</view>

@@ -1,0 +1,9 @@
+[submodule "lib/redview"]
+	path = lib/redview
+	url = git@github.com:gitbuh/redview.git
+[submodule "lib/redmodel"]
+	path = lib/redmodel
+	url = git@github.com:gitbuh/redmodel.git
+[submodule "lib/redbean"]
+	path = lib/redbean
+	url = git@github.com:gitbuh/redbean.git

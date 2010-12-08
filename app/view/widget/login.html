@@ -1,0 +1,37 @@
+<view>
+
+      
+  <?php if (@$_SESSION['user']['name']) { ?>
+    
+    <div class="panel">
+      <h2> Signed In </h2>
+      <form action="logout">
+        <label>
+          <?php echo $_SESSION['user']['name'] ?> (<?php echo $_SESSION['user']['email'] ?>)
+        </label>
+        <input type="submit" value="Sign Out" />
+      </form>
+    </div>
+    
+  <?php } else { ?>
+    
+    <div class="panel">
+      <h2> Sign In </h2>
+      <form action="login">
+        <label> Email Address
+          <input type="text" name="l" />
+        </label>
+        <label> Password
+          <input type="text" name="p" />
+        </label>
+        <input type="submit" />
+      </form>
+    </div>
+      
+    <load file='widget/register.html' />
+      
+  <?php } ?>
+      
+      
+    
+</view>

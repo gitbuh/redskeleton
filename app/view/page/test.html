@@ -1,0 +1,18 @@
+<view template='template/main.html'>
+
+  <slot set="title">Test Page</slot>
+    
+  <slot set="body">
+    
+  <div class="panel">
+    <h2> Create a User </h2>
+    <form action="register">
+      <model class="Model_User" />
+      <input type="submit" />
+    </form>
+  </div>
+  
+  </slot>
+  
+</view>
+
