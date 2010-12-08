@@ -18,7 +18,7 @@ class App_View extends RedView_View {
     $rs = explode(',', trim($roles, ','));
     $us = explode(',', trim($user->roles, ','));
     foreach ($rs as $r) foreach ($us as $u) if ($r==$u) return $user;
-    Slot::end('error', 'You don\'t have permission to do that.');
+    RedView::end('error', 'You don\'t have permission to do that.');
   }
   
   /**
