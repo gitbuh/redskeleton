@@ -46,7 +46,9 @@ class Model_User extends App_Model {
   */
   public static function login ($l, $p) {
     $user=R::findOne("user", "(@email=:l) and pwhash=:p", array('l'=>$l, 'p'=>sha1($p)));
+    
     if (!$user) RedView::end('error', 'User name and password don\'t match.');
+    
     $_SESSION['user']=$user->export();
     RedView::end('message', 'Logged in.');
   }
