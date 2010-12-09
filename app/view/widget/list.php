@@ -8,9 +8,8 @@ class App_View_Widget_List extends App_View_Widget {
       Create a mailing list
   */
   public static function createList () {
-    $user=self::access('admin');
-    $m = new Model_List();
-    $e = $m->createBean($_REQUEST);
+    self::access('admin');
+    Model_List::createBean($_REQUEST);
     RedView::end('message', 'List created.');
   }
   
@@ -18,10 +17,9 @@ class App_View_Widget_List extends App_View_Widget {
       Update a mailing list
   */
   public static function updateList () {
-    $user=self::access('admin');
-    $m = new Model_List();
-    $e = $m->updateBean($_REQUEST);
-    RedView::end($e ? 'error' : 'message', $e ? 'List not found.' : 'List updated.');
+    self::access('admin');
+    Model_List::updateBean($_REQUEST);
+    RedView::end('message', 'List updated.');
   }
 
 }

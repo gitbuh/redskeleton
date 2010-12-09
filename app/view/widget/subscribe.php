@@ -32,8 +32,7 @@ class App_View_Widget_Subscribe extends App_View_Widget {
     
     if (!$list->id) return RedView::set('error', "List doesn't exist.");
     
-    $m = new Model_Subscription;
-    $scrip = $m->createBean($_REQUEST);
+    $scrip = Model_Subscription::createBean($_REQUEST);
     $scrip->main = self::getUser();
     R::associate($list, $scrip);
     // R::store($list);

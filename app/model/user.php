@@ -30,9 +30,6 @@ class Model_User extends App_Model {
       Update - automatically caled by RedBean when stored.
   */
   public function update() {
-    if ($this->password2) {
-      RedView::end('error', 'Password verification is required.');
-    }
     if ($this->password != $this->password2) {
       RedView::end('error', 'Password mismatch.');
     }
@@ -47,7 +44,7 @@ class Model_User extends App_Model {
   /**
       User logs in
   */
-  public function login ($l, $p) {
+  public static function login ($l, $p) {
     $user=R::findOne("user", "(@email=:l) and pwhash=:p", array('l'=>$l, 'p'=>sha1($p)));
     if (!$user) RedView::end('error', 'User name and password don\'t match.');
     $_SESSION['user']=$user->export();
@@ -57,7 +54,7 @@ class Model_User extends App_Model {
   /**
       User logs out
   */
-  public function logout ($l, $p) {
+  public static function logout ($l, $p) {
     session_unset();
     session_destroy();
   }
