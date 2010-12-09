@@ -1,16 +1,27 @@
 <?php
 
 /** 
-    override forms 
+    Model tag
+
+    Writes form fields defined in a model.
+
+    Params:
+      class - class or object with 'metamodel' property, 
+              or a descendant of RedView_Meta_Model
+ 
 */
 class App_Tag_Model extends RedView_ATag {
   
+  /**
+      Register with the parser
+  */
   public static function register ($parser) {
     $parser->register('model', __CLASS__);
   }
   
   /**
-      Put a node before this node when writing to cache
+      Manipulate XML when writing to cache.
+      Call RedModel_Form::getFields 
   */
   public function markup ($parser) {
     
