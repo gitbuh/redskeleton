@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC
+          "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Dynarch Calendar -- Single calendar for multiple fields</title>
+    <script src="../src/js/jscal2.js"></script>
+    <script src="../src/js/lang/en.js"></script>
+    <link rel="stylesheet" type="text/css" href="../src/css/jscal2.css" />
+    <link rel="stylesheet" type="text/css" href="../src/css/border-radius.css" />
+    <link rel="stylesheet" type="text/css" href="../src/css/steel/steel.css" />
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td id="mon1"></td>
+        <td id="mon2"></td>
+        <td id="mon3"></td>
+      </tr>
+    </table>
+    <script>//<![CDATA[
+      // initial dates
+      var now = new Date();
+      var prev = new Date(); prev.setMonth(prev.getMonth() - 1);
+      var next = new Date(); next.setMonth(next.getMonth() + 1);
+
+      // create the calendars
+      var cal1 = Calendar.setup({ cont: "mon1", date: prev });
+      var cal2 = Calendar.setup({ cont: "mon2", date: now });
+      var cal3 = Calendar.setup({ cont: "mon3", date: next });
+
+      // this hack is necessary to prevent infinite recursion
+      var updating = false;
+
+      // next, assign some onChange handlers to each calendar; when
+      // the month/year is changed, update the other calendars
+      // accordingly.
+
+      cal1.addEventListener("onChange", function(cal, date, anim) {
+        if (!updating) {
+          updating = true;
+          date = new Date(date);
+          date.setMonth(date.getMonth() + 1);
+          cal2.moveTo(date, anim);
+          date = new Date(date);
+          date.setMonth(date.getMonth() + 1);
+          cal3.moveTo(date, anim);
+          updating = false;
+        }
+      });
+
+      cal2.addEventListener("onChange", function(cal, date, anim) {
+        if (!updating) {
+          updating = true;
+          date = new Date(date);
+          date.setMonth(date.getMonth() - 1);
+          cal1.moveTo(date, anim);
+          date = new Date(date);
+          date.setMonth(date.getMonth() + 2);
+          cal3.moveTo(date, anim);
+          updating = false;
+        }
+      });
+
+      cal3.addEventListener("onChange", function(cal, date, anim) {
+        if (!updating) {
+          updating = true;
+          date = new Date(date);
+          date.setMonth(date.getMonth() - 2);
+          cal1.moveTo(date, anim);
+          date = new Date(date);
+          date.setMonth(date.getMonth() + 1);
+          cal2.moveTo(date, anim);
+          updating = false;
+        }
+      });
+    //]]></script>
+  </body>
+</html>

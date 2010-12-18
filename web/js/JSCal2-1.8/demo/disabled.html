@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC
+          "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Dynarch Calendar -- Disabled dates</title>
+    <script src="../src/js/jscal2.js"></script>
+    <script src="../src/js/lang/en.js"></script>
+    <link rel="stylesheet" type="text/css" href="../src/css/jscal2.css" />
+    <link rel="stylesheet" type="text/css" href="../src/css/border-radius.css" />
+    <link rel="stylesheet" type="text/css" href="../src/css/steel/steel.css" />
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td style="width: 20em">
+          <div id="cont"></div>
+        </td>
+      </tr>
+    </table>
+    <script type="text/javascript">//<![CDATA[
+      Calendar.setup({
+              cont          : "cont",
+              fdow          : 1,
+              selectionType : Calendar.SEL_MULTIPLE,
+              disabled      : function(date) {
+                      // disable all dates between 5 and 15 every month
+                      return (date.getDate() >= 5 &&
+                              date.getDate() <= 15);
+              },
+
+              // checkRange: true, // if you simply want to disallow selection but not display anything
+
+              checkRange    : function(date, cal) {
+                      // if you pass a function, it gets called and receives the first date that
+                      // disallowed the selection, and the calendar object.
+                      alert("Date " + date + " cannot be selected");
+              }
+      });
+    //]]></script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<view template='template/main.html'>
+  <slot set="title"> <?php echo $this->name ?> Admin </slot>
+    
+  <slot set="head">
+  
+    <link rel="stylesheet" type="text/css" media="all" href="/js/sigma_grid2.4_release/grid/calendar/calendar-blue.css"  />
+    
+    <script type="text/javascript" src="/js/sigma_grid2.4_release/grid/calendar/calendar.js"></script>
+    <script type="text/javascript" src="/js/sigma_grid2.4_release/grid/calendar/calendar-en.js"></script>
+    <script type="text/javascript" src="/js/sigma_grid2.4_release/grid/calendar/calendar-setup.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="/js/sigma_grid2.4_release/grid/gt_grid.css" />
+    
+    <script type="text/javascript" src="/js/sigma_grid2.4_release/grid/gt_msg_en.js"></script>
+    <script type="text/javascript" src="/js/sigma_grid2.4_release/grid/gt_const.js"></script>
+    <script type="text/javascript" src="/js/sigma_grid2.4_release/grid/gt_grid_all.js"></script>
+    <script type="text/javascript" src="/js/sigma_grid2.4_release/grid/flashchart/fusioncharts/FusionCharts.js"></script>
+    
+    
+    <script type="text/javascript">
+
+function renderOptionText (value, record, columnObj, grid, colNo, rowNo) {
+	return columnObj.editor.options[record[columnObj.fieldIndex]];
+}
+
+var gridAction = "?_rv:data=<?php echo $gridAction ?>";
+
+var gridOption={
+
+  loadURL : gridAction,
+  saveURL : gridAction,
+  
+	id : "myGrid1",
+	width: "100%",  //"100%", // 700,
+	// height: "100%",  //"100%", // 330,
+	container : 'gridbox', 
+	replaceContainer : true, 
+	// skin : "mac",
+	/*
+	dataset : {
+	  recordType : 'array',
+    <?php echo  "fields :".json_encode($gridFields).
+                ", data :".json_encode($gridRows); ?>
+  },
+  */
+	columns : <?php echo $gridCols ?>,
+	pageInfo : {
+    "pageSize":40
+    /* ,
+    "pageNum":2,
+    "totalRowNum":31,
+    "totalPageNum":4,
+    "startRowNum":11,
+    "endRowNum":20
+    */  
+	},
+	toolbarPosition : 'top'
+};
+
+var mygrid=new Sigma.Grid( gridOption );
+Sigma.Util.onLoad( Sigma.Grid.render(mygrid) );
+
+    </script>
+  </slot>
+  
+  <slot set="left">
+    <slot get="left" />
+    <div class="panel">
+      <h2> <?php echo ($this->id ? 'Edit ' : 'Create ' ).$this->name ?> </h2>
+      <form action="edit">
+        <?php echo $fields ?>
+        <input type="submit" />
+      </form>
+    </div>
+  </slot>
+  
+  <slot set="body">
+  
+    <div class="panel thin">
+      <div id="bigbox" style="margin: 0; padding:0;">
+        <div id="gridbox" style="border:0px solid #cccccc;background-color:#f3f3f3;padding:0;width:100%;" ></div>
+      </div>
+    </div>
+    
+  </slot>
+  
+</view>
