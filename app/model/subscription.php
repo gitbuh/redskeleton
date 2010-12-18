@@ -14,6 +14,11 @@ class Model_Subscription extends App_Model {
         'type'  =>'numeric',
         'required'=>true,
       ),
+      'list'=>array(
+        'title'   =>'List',
+        'type'  =>'List',
+        'required'=>true,
+      ),
     ),
   );
   

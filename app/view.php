@@ -6,6 +6,10 @@ class App_View extends RedView_View {
     // print_r($_SESSION);
   }
   
+  public function gridAction () {
+    print_r(RedView::args()); print_r($this); print_r($_REQUEST); die;
+  }
+  
   //
   // protected
   //
@@ -26,7 +30,7 @@ class App_View extends RedView_View {
   */
   protected static function getUser() {
     $user = R::dispense('user');
-    $user->import($_SESSION['user']); 
+    $user->import(@$_SESSION['user']); 
     return $user; // $user->id ? $user : null;
   }
   

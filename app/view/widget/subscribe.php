@@ -2,6 +2,8 @@
 
 class App_View_Widget_Subscribe extends App_View_Widget {
 
+  public $inLists;
+
   public function beforeRender () {
     parent::beforeRender();
     $listsAvailable = R::find('list');
@@ -35,8 +37,6 @@ class App_View_Widget_Subscribe extends App_View_Widget {
     $scrip = Model_Subscription::createBean($_REQUEST);
     $scrip->main = self::getUser();
     R::associate($list, $scrip);
-    // R::store($list);
-    // R::store($scrip);
     $_SESSION['user'] = $scrip->main->export();
     return RedView::set('message', 'Success!');
   }

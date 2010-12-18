@@ -1,38 +1,46 @@
 <html>
   <head>
-    <style>
-      body {font-family: "arial", sans-serif; font-size:10pt; }
-      .panel { background: silver; position:relative; }
-      .panel h1, .panel h2 { display : block; margin: 8px; border-bottom: 1px solid black;   }
-      .panel label { display : block; margin: 8px;   }
-      .panel label input, label select { display : block; width:100%; }
-      .panel input[type='submit'] { display:block; float:right; margin:8px;  }
-      .panel { width:256px; padding:8px 8px 40px 8px; margin:16px; }
-      .message, .error { margin: 16px; font-weight:bold; padding: 8px 16px;}
-      .message {background:#dfd; border: 1px solid #3c3; }
-      .error {background:#fdd; border: 1px solid #c33;}
-      fieldset { margin:0; padding:0; border:none; }
-    </style>
+    <title><slot get='title' /> - RedSkeleton</title>
+    <link rel="stylesheet" type="text/css" href="/css/app.css" />
     <slot get='head' />
   </head>
   <body>
-    <div style="float:right">
-      <load file='widget/login.html' />
+    <div class="page-top">
+        <div style="float:left">
+          <h1><slot get='title' /></h1>
+          
+          <ul class="nav">
+          
+            <?php foreach (array_reverse(glob('model/*')) as $v) {
+              $name = basename($v,".php");
+              $cssCls = RedView::args(1)==$name ? 'class="current" ' : '';
+              echo "<li><a {$cssCls}href='/admin/edit/$name'>".ucwords($name)."</a></li>";
+            } ?>
+            
+          </ul>
+          
+          <div class="status">
+            <span class="message"><slot get='message' /></span>
+            <span class="error"><slot get='error' /></span>
+          </div>
+        </div>
+        
+        <slot get="top" />
     </div>
-    <h1> RedSkeleton - <slot get='title' /> </h1>
     
-    <ul class="nav">
-      <li><a href="/">Home</a></li>
-      <li><a href="/admin/">Admin</a></li>
-    </ul>
+    <div class="page-left">
+        <slot get="left" />
+    </div>
     
-    <span class="message">
-      <slot get='message' />
-    </span>
-    <span class="error">
-      <slot get='error' />
-    </span>
-    <slot get='body' />
+    <div class="page-right">
+        <load file='widget/login.html' />
+    </div>
+    
+    <div class="page-middle">
+        <slot get="body" />
+    </div>
+      
+        
   </body>
 </html>
 

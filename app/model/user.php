@@ -14,17 +14,33 @@ class Model_User extends App_Model {
         'required'=>true,
       ),
       'zip'=>array(
-        'title'=>'Zip (postal) Code',
+        'title'=>'Zip (Postal) Code',
+        'type'=>'numeric',
       ),
       'password'=>array(
         'required'=>true,
+        'context'=>'create',
       ),
       'password2'=>array(
         'title'=>'Password Confirmation',
         'required'=>true,
+        'context'=>'create',
+      ),
+      'birthday'=>array(
+        'type'=>'date',
+      ),
+      'refcode'=>array(
+        'title'=>'Referral Code',
       ),
     ),
   );
+  
+  /**
+      Update - automatically caled by RedBean when dispensed.
+  */
+  public function dispense () {
+    $this->bean->roles='guest';
+  }
   
   /**
       Update - automatically caled by RedBean when stored.
